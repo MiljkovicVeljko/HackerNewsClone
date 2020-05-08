@@ -1,4 +1,7 @@
 
 <div class="layout" *ngIf="loadStoriesId">
-  <app-news-card *ngFor="let current of currentData" [current]="current"></app-news-card>
+  <div class="row" *ngFor="let story of loadStoriesId; let i = index">
+    <span>{{ i+1 }}.</span><app-news-card [story]="story"></app-news-card>
+  </div>
+  <button (click)="loadMore()">More</button>
 </div>
