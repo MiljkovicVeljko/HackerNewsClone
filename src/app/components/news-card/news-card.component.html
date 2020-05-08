@@ -1,1 +1,7 @@
-<span>Title: {{ current.title }}</span>
+<div *ngIf="current">
+  <span class="arrow-up"></span>
+  {{ current.title }}
+  <br />
+  <p>640 points by <a href="#">{{ current.by }}</a> 5 hours ago | hide | 263 comments</p>
+</div>
+<!-- <a href="#">({{ current.url }})</a> -->

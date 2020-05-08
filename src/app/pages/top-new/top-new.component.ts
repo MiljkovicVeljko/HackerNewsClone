@@ -1,8 +1,6 @@
-import { take } from 'rxjs/operators';
 import { ServiceService } from './../../shared/service.service';
 import { Component, OnInit } from '@angular/core';
 import { IStoryData } from 'src/app/shared/interfaces';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-top-new',
@@ -12,19 +10,20 @@ import { Subject } from 'rxjs';
 export class TopNewComponent implements OnInit {
   loadStoriesId;
   currentData: IStoryData;
+  initialLoad: number = 10;
 
-  constructor(private service: ServiceService) {
+  constructor(private service: ServiceService) {}
+
+  ngOnInit(): void {
     this.getStories();
-    this.getStory();
-  }
-
-  ngOnInit(): void { }
-
-  getStory() {
-    this.service.getCurrentStory(this.loadStoriesId).pipe(take(5)).subscribe(res => this.currentData = res)
   }
 
   getStories() {
-    this.service.getStoriesList().subscribe(res => this.loadStoriesId = res);
+    this.service.getStoriesList(this.initialLoad).subscribe(res => this.loadStoriesId = res);
+  }
+
+  loadMore() {
+    this.initialLoad = this.initialLoad + 30;
+    this.getStories();
   }
 }

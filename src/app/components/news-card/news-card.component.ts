@@ -1,3 +1,4 @@
+import { ServiceService } from './../../shared/service.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { IStoryData } from "../../shared/interfaces";
 
@@ -7,12 +8,17 @@ import { IStoryData } from "../../shared/interfaces";
   styleUrls: ['./news-card.component.scss']
 })
 export class NewsCardComponent implements OnInit {
-  @Input() current: IStoryData;
+  @Input() story;
+  current:IStoryData;
 
-  constructor() {
+  constructor(private service: ServiceService) {
   }
 
   ngOnInit(): void {
+    this.getStory();
   }
 
+  getStory() {
+    this.service.getCurrentStory(this.story).subscribe(res => this.current = res);
+  }
 }
