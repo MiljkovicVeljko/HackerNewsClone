@@ -2,6 +2,7 @@ nav {
   background: #FF6600;
   width: 80vw;
   margin: auto;
+
   @media screen and (max-width:1020px) {
     width: 100vw;
     }
@@ -12,6 +13,7 @@ nav {
     list-style-type: none;
     padding: 0;
     margin-bottom: 0;
+    font-size: 14px;
     @media screen and (max-width:1020px) {
       width: 100vw;
       margin: 0;

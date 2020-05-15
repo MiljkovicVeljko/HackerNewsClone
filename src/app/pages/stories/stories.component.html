@@ -1,0 +1,7 @@
+
+<div class="layout" *ngIf="topStories$ | async">
+  <div class="row" *ngFor="let story of topStories$ | async; let i = index">
+    <span>{{ i+1 }}.</span><span>ID: {{ story }}</span>
+  </div>
+  <button (click)="loadMore()">More</button>
+</div>

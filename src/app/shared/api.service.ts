@@ -1,23 +1,23 @@
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { IStoryData } from './interfaces';
-import { Observable } from 'rxjs';
+import { Observable } from "rxjs";
+import { storyItem } from '../store/models/story-item.model';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class ServiceService {
+export class ApiService {
   private baseUrl: string = "https://hacker-news.firebaseio.com/v0/";
 
   constructor(private http: HttpClient) { }
 
-  getCurrentStory(id: number): Observable<IStoryData> {
-    return this.http.get<IStoryData>(`${this.baseUrl}item/${id}.json?print=pretty`)
+  getCurrentStory(id: number): Observable<storyItem> {
+    return this.http.get<storyItem>(`${this.baseUrl}item/${id}.json?print=pretty`)
   }
 
-  getStoriesList(paginate) {
+  getStoriesList(paginate): Observable<number> {
     return this.http.get(`${this.baseUrl}topstories.json?print=pretty`)
       .pipe(
         map(data => this.getPaginatedData(data, paginate)))

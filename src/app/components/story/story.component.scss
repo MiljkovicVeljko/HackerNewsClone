@@ -10,7 +10,8 @@
 }
 
 div {
-  width: 50em;
+  width: 50vw;
+  max-width: 100vw;
   font-family: Verdana;
   a {
     font-size: .8em;

@@ -1,5 +1,10 @@
 
 <app-header></app-header>
-<!-- <app-top-new></app-top-new> -->
 <router-outlet></router-outlet>
+<!-- <ul class="row" *ngIf="topStories$ | async">
+  <li *ngFor="let story of topStories$ | async">ID: {{ story }}</li>
+</ul> -->
+<!-- <button (click)="getTopStories()">Get Stories</button> -->
+<!-- <p>stories: {{ topStories$ | async }}</p> -->
+<!-- <button (click)="loadMore()">More</button> -->
 <app-footer></app-footer>

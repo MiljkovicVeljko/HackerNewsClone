@@ -1,10 +1,10 @@
-import { TopNewComponent } from './pages/top-new/top-new.component';
+import { StoriesComponent } from './pages/stories/stories.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
-  {path: '', component: TopNewComponent}
+  {path: "", component: StoriesComponent},
 ];
 
 @NgModule({

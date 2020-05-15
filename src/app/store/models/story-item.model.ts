@@ -1,4 +1,4 @@
-export interface IStoryData {
+export interface storyItem {
   by: string,
   descendants: number,
   id: number,
