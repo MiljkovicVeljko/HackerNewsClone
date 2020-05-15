@@ -1,7 +1,6 @@
-<!-- <div *ngIf="current">
+<div *ngIf="story">
   <span class="arrow-up"></span>
-  {{ current.title }}
+  {{ story.title }}
   <br />
-  <p>640 points by <a href="#">{{ current.by }}</a> 5 hours ago | hide | 263 comments</p>
-</div> -->
-<!-- <a href="#">({{ current.url }})</a> -->
+  <p>640 points by <a href="#">{{ story.by }}</a> 5 hours ago | hide | {{ story.kids.length }} comments</p>
+</div>
