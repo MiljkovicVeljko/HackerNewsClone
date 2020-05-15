@@ -9,11 +9,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
-import { NewsCardComponent } from './components/story/story.component';
+import { StoryComponent } from './components/story/story.component';
 import { CommentCardComponent } from './components/comment-card/comment-card.component';
 import { StoriesComponent } from './pages/stories/stories.component';
 import { CommonModule } from '@angular/common';
-import { topStoriesReducer } from "./store/reducers/top-stories.reducer";
+import { storiesReducer } from "./store/reducers/top-stories.reducer";
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
@@ -23,7 +23,7 @@ import { EffectsModule } from '@ngrx/effects';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    NewsCardComponent,
+    StoryComponent,
     CommentCardComponent,
     StoriesComponent
   ],
@@ -33,7 +33,7 @@ import { EffectsModule } from '@ngrx/effects';
     HttpClientModule,
     CommonModule,
     StoreModule.forRoot({
-      state: topStoriesReducer
+      state: storiesReducer
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

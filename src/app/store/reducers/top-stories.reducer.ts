@@ -2,26 +2,23 @@ import { getTopStoriesSucces, getTopStoriesFailure, getStoryItemsFailure, getSto
 import { createReducer, on } from '@ngrx/store';
 import { storyItem } from '../models/story-item.model';
 
-export interface TopStoriesState {
+export interface State {
   topStoriesList: number[],
   storyItems: storyItem[]
   loading: boolean,
   error: Error
 }
 
-const initalState: TopStoriesState = {
+const initalState: State = {
   topStoriesList: [],
   storyItems: [],
   loading: false,
   error: null
 };
 
-export const topStoriesReducer = createReducer(initalState,
+export const storiesReducer = createReducer(initalState,
   on(getTopStoriesFailure, (state, action) => ({ ...state, error: action.error })),
-  on(getTopStoriesSucces, (state, action) => ({ ...state, topStoriesList: action.topStoriesList }))
-);
-
-export const storyItemReducer = createReducer(initalState,
+  on(getTopStoriesSucces, (state, action) => ({ ...state, topStoriesList: action.topStoriesList })),
   on(getStoryItemsFailure, (state, action) => ({ ...state, error: action.error })),
   on(getStoryItemsSucces, (state, action) => ({ ...state, storyItems: action.storyItems }))
 );
