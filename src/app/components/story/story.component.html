@@ -1,6 +1,12 @@
 <div *ngIf="story">
   <span class="arrow-up"></span>
-  {{ story.title }}
+  <a class="card-title" [href]="story.url" target="_blank">{{ story.title }}</a>
   <br />
-  <p>640 points by <a href="#">{{ story.by }}</a> 5 hours ago | hide | {{ story.kids.length }} comments</p>
+  <p>
+    {{ story.score }} points by
+    <a class="sub-info" >{{ story.by }} </a>
+    <a class="sub-info" >{{ story.time | date: 'HH' }} hours ago</a> |
+    <a class="sub-info" >hide</a> |
+    <a class="sub-info" (click)="onShowComments(story.id)" >{{ story.descendants }} comments</a>
+  </p>
 </div>

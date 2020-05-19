@@ -10,16 +10,11 @@
 }
 
 div {
-  width: 50vw;
+  width: 100%;
   max-width: 100vw;
-  font-family: Verdana;
-  a {
+  .sub-info {
     font-size: .8em;
     color: rgb(160, 160, 160);
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
   }
 }
 p {
@@ -28,4 +23,8 @@ p {
   font-size: .8em;
   color: rgb(160, 160, 160);
   margin-left: 1em;
+}
+
+.card-title {
+  color: #000;
 }

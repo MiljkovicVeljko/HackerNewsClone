@@ -1,10 +1,11 @@
-import { getTopStoriesSucces, getTopStoriesFailure, getStoryItemsFailure, getStoryItemsSucces } from './../actions/top-stories.actions';
+import { getTopStoriesSucces, getTopStoriesFailure, getStoryItemsFailure, getStoryItemsSucces, getCommentSucces, getCommentFailure } from './../actions/top-stories.actions';
 import { createReducer, on } from '@ngrx/store';
-import { storyItem } from '../models/story-item.model';
+import { storyItem, commentItem } from '../models/story-item.model';
 
 export interface State {
   topStoriesList: number[],
-  storyItems: storyItem[]
+  storyItems: storyItem[],
+  comments: commentItem[],
   loading: boolean,
   error: Error
 }
@@ -12,6 +13,7 @@ export interface State {
 const initalState: State = {
   topStoriesList: [],
   storyItems: [],
+  comments: [],
   loading: false,
   error: null
 };
@@ -20,5 +22,7 @@ export const storiesReducer = createReducer(initalState,
   on(getTopStoriesFailure, (state, action) => ({ ...state, error: action.error })),
   on(getTopStoriesSucces, (state, action) => ({ ...state, topStoriesList: action.topStoriesList })),
   on(getStoryItemsFailure, (state, action) => ({ ...state, error: action.error })),
-  on(getStoryItemsSucces, (state, action) => ({ ...state, storyItems: action.storyItems }))
+  on(getStoryItemsSucces, (state, action) => ({ ...state, storyItems: action.storyItems })),
+  on(getCommentFailure, (state, action) => ({ ...state, error: action.error })),
+  on(getCommentSucces, (state, action) => ({ ...state, comments: action.comments }))
 );

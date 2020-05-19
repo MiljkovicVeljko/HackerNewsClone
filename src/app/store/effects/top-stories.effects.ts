@@ -1,5 +1,13 @@
 import { AppState } from 'src/app/store/models/app-state.model';
-import { getTopStories, getTopStoriesSucces, getTopStoriesFailure, getStoryItems, getStoryItemsSucces } from './../actions/top-stories.actions';
+import {
+  getTopStories,
+  getTopStoriesSucces,
+  getTopStoriesFailure,
+  getStoryItems,
+  getStoryItemsSucces,
+  getComment,
+  getCommentSucces
+} from './../actions/top-stories.actions';
 import { ApiService } from './../../shared/api.service';
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
@@ -27,9 +35,9 @@ export class TopStoriesEffects {
     this.action$.pipe(
       ofType(getTopStoriesSucces),
       withLatestFrom(this.store),
-      mergeMap(([first, second]) =>
+      mergeMap(([first, store]) =>
         forkJoin(
-          second.state.topStoriesList.map(id => this.apiService.getCurrentStory(id)
+          store.state.topStoriesList.map(id => this.apiService.getCurrentStory(id)
           )
         ).pipe(
           map(res => getStoryItemsSucces({ storyItems: res }))
@@ -37,6 +45,23 @@ export class TopStoriesEffects {
       )
     )
   );
+
+  // loadCommentItems$: Observable<Action> = createEffect(() =>
+  //   this.action$.pipe(
+  //     ofType(getComment),
+  //     withLatestFrom(this.store),
+  //     mergeMap(([first, second]) =>
+  //       forkJoin(
+  //         // how to pass arg to effect?
+  //         // this effect trigger when user click on comments of specific item
+  //         //
+  //         second.state.storyItems.find(story => story.id )
+  //       ).pipe(
+  //         map(res => getCommentSucces({ comments: res }))
+  //       )
+  //     )
+  //   )
+  // );
 
   constructor(
     private action$: Actions,

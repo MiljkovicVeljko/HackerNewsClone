@@ -5,3 +5,14 @@ body {
   margin: 0;
   box-sizing: border-box;
 }
+
+* {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 13.333px;
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

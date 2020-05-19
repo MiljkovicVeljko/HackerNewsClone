@@ -1,3 +1,4 @@
+import { commentItem } from './../store/models/story-item.model';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
@@ -19,8 +20,12 @@ export class ApiService {
 
   getStoriesList(paginate): Observable<number> {
     return this.http.get(`${this.baseUrl}topstories.json?print=pretty`)
-      .pipe(
-        map(data => this.getPaginatedData(data, paginate)))
+    .pipe(
+      map(data => this.getPaginatedData(data, paginate)))
+    }
+
+  getComments(id: number) {
+    return this.http.get<commentItem>(`${this.baseUrl}item/${id}.json?print=pretty`)
   }
 
   private getPaginatedData(list, paginate) {
