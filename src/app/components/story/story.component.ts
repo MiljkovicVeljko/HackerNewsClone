@@ -1,16 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
-// import { IStoryData } from "../../shared/interfaces";
+import { storyItem } from 'src/app/store/models/story-item.model';
 
 @Component({
   selector: 'app-story',
   templateUrl: './story.component.html',
   styleUrls: ['./story.component.scss']
 })
-export class NewsCardComponent implements OnInit {
+export class StoryComponent implements OnInit {
+  @Input() story: storyItem;
   constructor() {
   }
 
   ngOnInit(): void {
   }
-
 }
