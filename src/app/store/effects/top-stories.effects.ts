@@ -4,8 +4,8 @@ import {
   getTopStoriesSucces,
   getTopStoriesFailure,
   getStoryItemsSucces,
-  getComment,
-  getCommentSucces
+  getComments,
+  getCommentsSucces,
 } from './../actions/top-stories.actions';
 import { ApiService } from './../../shared/api.service';
 import { Injectable } from "@angular/core";
@@ -46,21 +46,21 @@ export class TopStoriesEffects {
 
   loadCommentItems$: Observable<Action> = createEffect(() =>
     this.action$.pipe(
-      ofType(getComment),
+      ofType(getComments),
       withLatestFrom(this.store),
       map(([action, store]) => {
-        let list = store.state.storyItems.find(story =>
-          story.id == action.id).kids
-        return list;
+        let commentOrStory = store.state.storyItems.find(story =>
+          story.id == action.id)
+        return commentOrStory;
       }
       ),
-      mergeMap(kids =>
-        forkJoin(this.apiService.getComments(kids)
+      mergeMap(commentOrStory =>
+        forkJoin(this.apiService.getComments(commentOrStory.kids)
         ).pipe(
-            map(res => getCommentSucces({ comments: res })
+            map(comments => getCommentsSucces({ comments: comments })
           )
         )
-      )
+      ),
     )
   );
 

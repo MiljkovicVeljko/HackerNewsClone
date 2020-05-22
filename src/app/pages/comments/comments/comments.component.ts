@@ -1,7 +1,7 @@
-import { getComment } from './../../../store/actions/top-stories.actions';
+import { Observable } from 'rxjs';
+import { getComments } from './../../../store/actions/top-stories.actions';
 import { AppState } from './../../../store/models/app-state.model';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
 import { commentItem } from 'src/app/store/models/story-item.model';
@@ -22,7 +22,11 @@ export class CommentsComponent {
     private store: Store<AppState>
   ) {
     this.id = this.route.snapshot.params['id'];
-    this.store.dispatch(getComment({ id: this.id }))
+    this.store.dispatch(getComments({ id: this.id }))
    }
 
+  //  showSubcomments(ids: number[]) {
+  //    ids.map(id => this.store.dispatch(getComments({ id: id})))
+
+  //  }
 }

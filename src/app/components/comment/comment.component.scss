@@ -22,7 +22,7 @@
   }
   p {
     margin: 0;
-    padding: 0;
+    padding: 1em;
     font-size: .8em;
     color: rgb(160, 160, 160);
     margin-left: 1em;
@@ -30,5 +30,10 @@
 
   .card-title {
     color: #000;
+  }
+  .text {
+    margin: 1em;
+    padding-left: 5em;
+    line-height: 1.5em;
   }
 }

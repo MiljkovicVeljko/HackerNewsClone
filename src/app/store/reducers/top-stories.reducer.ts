@@ -3,8 +3,8 @@ import {
   getTopStoriesFailure,
   getStoryItemsFailure,
   getStoryItemsSucces,
-  getCommentSucces,
-  getCommentFailure,
+  getCommentsSucces,
+  getCommentsFailure,
   loadMore
 } from './../actions/top-stories.actions';
 import { createReducer, on } from '@ngrx/store';
@@ -31,9 +31,12 @@ const initalState: State = {
 export const storiesReducer = createReducer(initalState,
   on(getTopStoriesFailure, (state, action) => ({ ...state, error: action.error })),
   on(getTopStoriesSucces, (state, action) => ({ ...state, topStoriesList: action.topStoriesList })),
+
   on(getStoryItemsFailure, (state, action) => ({ ...state, error: action.error })),
   on(getStoryItemsSucces, (state, action) => ({ ...state, storyItems: action.storyItems })),
-  on(getCommentFailure, (state, action) => ({ ...state, error: action.error })),
-  on(getCommentSucces, (state, action) => ({...state, comments: action.comments })),
+
+  on(getCommentsFailure, (state, action) => ({ ...state, error: action.error })),
+  on(getCommentsSucces, (state, action) => ({ ...state, comments: action.comments })),
+
   on(loadMore, state => ({...state, initialLoad: state.initialLoad + 30}))
 );
