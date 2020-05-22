@@ -3,7 +3,7 @@ import { AppState } from './../../../store/models/app-state.model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { commentItem } from 'src/app/store/models/story-item.model';
 
 @Component({
@@ -11,7 +11,7 @@ import { commentItem } from 'src/app/store/models/story-item.model';
   templateUrl: './comments.component.html',
   styleUrls: ['./comments.component.scss']
 })
-export class CommentsComponent implements OnInit {
+export class CommentsComponent {
   id: number;
   comments$: Observable<commentItem[]> = this.store.select(
     store => store.state.comments
@@ -24,9 +24,5 @@ export class CommentsComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.store.dispatch(getComment({ id: this.id }))
    }
-
-  ngOnInit(): void {
-
-  }
 
 }
