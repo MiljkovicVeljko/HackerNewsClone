@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { StoryComponent } from './components/story/story.component';
-import { CommentCardComponent } from './components/comment-card/comment-card.component';
+import { CommentComponent } from './components/comment/comment.component';
 import { StoriesComponent } from './pages/stories/stories.component';
 import { CommonModule } from '@angular/common';
 import { storiesReducer } from "./store/reducers/top-stories.reducer";
@@ -25,7 +25,7 @@ import { CommentsComponent } from './pages/comments/comments/comments.component'
     HeaderComponent,
     FooterComponent,
     StoryComponent,
-    CommentCardComponent,
+    CommentComponent,
     StoriesComponent,
     CommentsComponent
   ],

@@ -1,1 +1,5 @@
-<p>comments {{comments$ | async}}! Its have id: {{id}}</p>
+<div class="layout" *ngIf="comments$ | async">
+  <div *ngFor="let comment of comments$ | async">
+    <app-comment [comment]="comment"></app-comment>
+  </div>
+</div>

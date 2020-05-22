@@ -24,8 +24,8 @@ export class ApiService {
       map(data => this.getPaginatedData(data, paginate)))
     }
 
-  getComments(id: number) {
-    return this.http.get<commentItem>(`${this.baseUrl}item/${id}.json?print=pretty`)
+  getComments(ids: number[]) {
+    return ids.map(id => this.http.get<commentItem>(`${this.baseUrl}item/${id}.json?print=pretty`))
   }
 
   private getPaginatedData(list, paginate) {

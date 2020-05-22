@@ -1,4 +1,4 @@
-import { getTopStoriesSucces, getTopStoriesFailure, getStoryItemsFailure, getStoryItemsSucces, getCommentSucces, getCommentFailure } from './../actions/top-stories.actions';
+import { getTopStoriesSucces, getTopStoriesFailure, getStoryItemsFailure, getStoryItemsSucces, getCommentSucces, getCommentFailure, loadMore } from './../actions/top-stories.actions';
 import { createReducer, on } from '@ngrx/store';
 import { storyItem, commentItem } from '../models/story-item.model';
 
@@ -7,7 +7,8 @@ export interface State {
   storyItems: storyItem[],
   comments: commentItem[],
   loading: boolean,
-  error: Error
+  error: Error,
+  initialLoad: number;
 }
 
 const initalState: State = {
@@ -15,8 +16,22 @@ const initalState: State = {
   storyItems: [],
   comments: [],
   loading: false,
-  error: null
+  error: null,
+  initialLoad: 30
 };
+
+// const commentPusher = (commentOrStory, comments) => {
+//   if (commentOrStory.id === comments[0].parent) {
+//     return Object.assign({}, commentOrStory, { comments });
+//   }
+//   if (commentOrStory.id !== comments[0].parent) {
+//     return Object.assign({}, commentOrStory, {
+//       comments: commentOrStory.comments.map(comment =>
+//         commentPusher(comment, comments)
+//       )
+//     });
+//   }
+// }
 
 export const storiesReducer = createReducer(initalState,
   on(getTopStoriesFailure, (state, action) => ({ ...state, error: action.error })),
@@ -24,5 +39,6 @@ export const storiesReducer = createReducer(initalState,
   on(getStoryItemsFailure, (state, action) => ({ ...state, error: action.error })),
   on(getStoryItemsSucces, (state, action) => ({ ...state, storyItems: action.storyItems })),
   on(getCommentFailure, (state, action) => ({ ...state, error: action.error })),
-  on(getCommentSucces, (state, action) => ({ ...state, comments: action.comments }))
+  on(getCommentSucces, (state, action) => ({...state, comments: action.comments })),
+  on(loadMore, (state, action) => ({...state, initialLoad: state.initialLoad + 30}))
 );

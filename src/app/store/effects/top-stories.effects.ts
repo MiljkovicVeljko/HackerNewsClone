@@ -3,7 +3,6 @@ import {
   getTopStories,
   getTopStoriesSucces,
   getTopStoriesFailure,
-  getStoryItems,
   getStoryItemsSucces,
   getComment,
   getCommentSucces
@@ -17,12 +16,11 @@ import { Action, Store } from '@ngrx/store';
 
 @Injectable()
 export class TopStoriesEffects {
-  initialLoad: number = 30;
-
   loadTopStories$: Observable<Action> = createEffect(() =>
     this.action$.pipe(
       ofType(getTopStories),
-      mergeMap(() => this.apiService.getStoriesList(this.initialLoad)
+      withLatestFrom(this.store),
+      mergeMap(([action, store]) => this.apiService.getStoriesList(store.state.initialLoad)
         .pipe(
           map(res => getTopStoriesSucces({ topStoriesList: res })),
           catchError(error => of(getTopStoriesFailure({ error }))),
@@ -35,7 +33,7 @@ export class TopStoriesEffects {
     this.action$.pipe(
       ofType(getTopStoriesSucces),
       withLatestFrom(this.store),
-      mergeMap(([first, store]) =>
+      mergeMap(([action, store]) =>
         forkJoin(
           store.state.topStoriesList.map(id => this.apiService.getCurrentStory(id)
           )
@@ -46,22 +44,23 @@ export class TopStoriesEffects {
     )
   );
 
-  // loadCommentItems$: Observable<Action> = createEffect(() =>
-  //   this.action$.pipe(
-  //     ofType(getComment),
-  //     withLatestFrom(this.store),
-  //     mergeMap(([first, second]) =>
-  //       forkJoin(
-  //         // how to pass arg to effect?
-  //         // this effect trigger when user click on comments of specific item
-  //         //
-  //         second.state.storyItems.find(story => story.id )
-  //       ).pipe(
-  //         map(res => getCommentSucces({ comments: res }))
-  //       )
-  //     )
-  //   )
-  // );
+  loadCommentItems$: Observable<Action> = createEffect(() =>
+    this.action$.pipe(
+      ofType(getComment),
+      withLatestFrom(this.store),
+      mergeMap(([ action, store ]) =>
+        forkJoin(this.apiService.getComments(
+            store.state.storyItems.find(
+              story => story.id == action.id
+            ).kids
+        )
+        ).pipe(
+            map(res => getCommentSucces({ comments: res })
+          )
+        )
+      )
+    )
+  );
 
   constructor(
     private action$: Actions,

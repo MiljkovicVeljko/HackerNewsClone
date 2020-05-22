@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { AppState } from 'src/app/store/models/app-state.model';
-import { getTopStories } from 'src/app/store/actions/top-stories.actions';
+import { getTopStories, loadMore } from 'src/app/store/actions/top-stories.actions';
 
 @Component({
   selector: 'app-stories',
@@ -12,15 +12,19 @@ import { getTopStories } from 'src/app/store/actions/top-stories.actions';
 })
 export class StoriesComponent implements OnInit {
   storyItems$: Observable<storyItem[]> = this.store.select(store => store.state.storyItems );
-  initialLoad: number = 30;
 
   constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
-    this.store.dispatch(getTopStories());
+    this.reload();
   }
 
   loadMore() {
-    this.initialLoad = this.initialLoad + 30;
+    this.store.dispatch(loadMore());
+    this.reload();
+  }
+
+  reload() {
+    this.store.dispatch(getTopStories());
   }
 }
