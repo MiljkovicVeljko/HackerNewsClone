@@ -25,8 +25,4 @@ export class CommentsComponent {
     this.store.dispatch(getComments({ id: this.id }))
    }
 
-  //  showSubcomments(ids: number[]) {
-  //    ids.map(id => this.store.dispatch(getComments({ id: id})))
-
-  //  }
 }

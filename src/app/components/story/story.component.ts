@@ -1,9 +1,6 @@
-import { ApiService } from './../../shared/api.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { storyItem } from 'src/app/store/models/story-item.model';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-story',
