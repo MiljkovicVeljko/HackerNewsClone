@@ -20,8 +20,9 @@ export class ApiService {
 
   getStoriesList(paginate): Observable<number> {
     return this.http.get(`${this.baseUrl}topstories.json?print=pretty`)
-    .pipe(
-      map(data => this.getPaginatedData(data, paginate)))
+      .pipe(
+        map(data => this.getPaginatedData(data, paginate))
+      )
     }
 
   getComments(ids: number[]) {

@@ -2,6 +2,8 @@
   background: #F6F6EF;
   width: 80vw;
   margin: auto;
+  padding-top: .5em;
+
   @media screen and (max-width:1020px) {
     width: 100vw;
   }
@@ -10,9 +12,7 @@
     justify-content: stretch;
     align-items: center;
     width: 100%;
-    // @media screen and (max-width:1020px) {
-    //   width: 100vw;
-    // }
+
   }
   span {
     color: #ccc;

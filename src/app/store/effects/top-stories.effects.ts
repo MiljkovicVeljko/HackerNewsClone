@@ -16,6 +16,7 @@ import { Action, Store } from '@ngrx/store';
 
 @Injectable()
 export class TopStoriesEffects {
+
   loadTopStories$: Observable<Action> = createEffect(() =>
     this.action$.pipe(
       ofType(getTopStories),
