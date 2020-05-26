@@ -17,7 +17,7 @@ import { storiesReducer } from "./store/reducers/top-stories.reducer";
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { CommentsComponent } from './pages/comments/comments/comments.component';
+import { CommentsComponent } from './pages/comments/comments.component';
 
 @NgModule({
   declarations: [

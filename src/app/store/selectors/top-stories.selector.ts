@@ -1,10 +1,10 @@
 import { createSelector } from "@ngrx/store";
-import { TopStoriesState } from "../reducers/top-stories.reducer";
+import { State } from "../reducers/top-stories.reducer";
 
-const getSelectedData = (state: TopStoriesState): any => state.topStoriesList
+const getSelectedData = (state: State): any => state.topStoriesList
 
 const getTopStoriesSelector = createSelector(
-  (state: {topStoriesState: TopStoriesState}) => state.topStoriesState,
+  (state: {topStoriesState: State}) => state.topStoriesState,
   getSelectedData
 );
 

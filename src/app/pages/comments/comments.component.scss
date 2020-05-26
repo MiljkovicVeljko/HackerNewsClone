@@ -1,0 +1,19 @@
+.layout {
+  background: #F6F6EF;
+  width: 80vw;
+  margin: auto;
+  padding: .5em 0 0 .5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  @media screen and (max-width:1020px) {
+    width: 100vw;
+  }
+  .text-box {
+    margin: 1.5em 1em;
+  }
+  .btn {
+    margin-left: 1em;
+  }
+}

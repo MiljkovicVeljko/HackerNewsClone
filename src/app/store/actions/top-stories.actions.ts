@@ -27,7 +27,7 @@ export const getStoryItems = createAction(GET_STORY_ITEMS);
 export const getStoryItemsSucces = createAction(GET_STORY_ITEMS_SUCCESS, props<{ storyItems: any }>());
 export const getStoryItemsFailure = createAction(GET_STORY_ITEMS_ERROR, props<{ error: any }>());
 
-export const getComments = createAction(GET_COMMENTS, props<{ id: number }>());
+export const getComments = createAction(GET_COMMENTS, props<{ ids: number }>());
 export const getCommentsSucces = createAction(GET_COMMENTS_SUCCESS, props<{ comments: commentItem[] }>());
 export const getCommentsFailure = createAction(GET_COMMENTS_ERROR, props<{ error: any }>());
 

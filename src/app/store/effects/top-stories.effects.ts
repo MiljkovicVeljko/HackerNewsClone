@@ -45,25 +45,24 @@ export class TopStoriesEffects {
     )
   );
 
-  loadCommentItems$: Observable<Action> = createEffect(() =>
-    this.action$.pipe(
-      ofType(getComments),
-      withLatestFrom(this.store),
-      map(([action, store]) => {
-        let commentOrStory = store.state.storyItems.find(story =>
-          story.id == action.id)
-        return commentOrStory;
-      }
-      ),
-      mergeMap(commentOrStory =>
-        forkJoin(this.apiService.getComments(commentOrStory.kids)
-        ).pipe(
-            map(comments => getCommentsSucces({ comments: comments })
-          )
-        )
-      ),
-    )
-  );
+  // loadCommentItems$: Observable<Action> = createEffect(() =>
+  //   this.action$.pipe(
+  //     ofType(getComments),
+  //     withLatestFrom(this.store),
+  //     map(([action, store]) => {
+  //       let commentOrStory = store.state.storyItems.find(story =>
+  //         story.id == action.id)
+  //       return commentOrStory;
+  //     }),
+  //     mergeMap(commentOrStory =>
+  //       forkJoin(this.apiService.getComments(commentOrStory.kids)
+  //       ).pipe(
+  //           map(comments => getCommentsSucces({ comments: comments })
+  //         )
+  //       )
+  //     ),
+  //   )
+  // );
 
   constructor(
     private action$: Actions,

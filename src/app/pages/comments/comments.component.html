@@ -1,0 +1,8 @@
+<div class="layout" *ngIf="currentStory">
+  <app-story [story]="currentStory"></app-story>
+  <textarea class="text-box" name="comment" id="comment" cols="50" rows="5"></textarea>
+  <button class="btn">add comment</button>
+  <!-- <div *ngFor="let comment of currentStory$ | async">
+    <app-comment [comment]="comment"></app-comment>
+  </div> -->
+</div>
