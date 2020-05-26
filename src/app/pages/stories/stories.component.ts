@@ -1,6 +1,7 @@
-import { storyItem } from './../../store/models/story-item.model';
+import { storyItemsSelector } from './../../store/selectors/index';
+import { storyItem } from './../../store/models/app-state.model';
 import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { AppState } from 'src/app/store/models/app-state.model';
 import { getTopStories, loadMore } from 'src/app/store/actions/top-stories.actions';
@@ -11,7 +12,7 @@ import { getTopStories, loadMore } from 'src/app/store/actions/top-stories.actio
   styleUrls: ['./stories.component.scss']
 })
 export class StoriesComponent implements OnInit {
-  storyItems$: Observable<storyItem[]> = this.store.select(store => store.state.storyItems );
+  storyItems$: Observable<storyItem[]> = this.store.pipe(select(storyItemsSelector));
 
   constructor(private store: Store<AppState>) {}
 
@@ -25,6 +26,6 @@ export class StoriesComponent implements OnInit {
   }
 
   reload() {
-    this.store.dispatch(getTopStories());
+    this.store.dispatch(getTopStories({ loading: true }));
   }
 }

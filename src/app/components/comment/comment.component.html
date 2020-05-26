@@ -1,7 +1,11 @@
 <div class="comment-container">
   <div class="head">
     <span class="arrow-up"></span>
-    <p class="card-title">{{ comment.by }}</p>
+    <p class="card-title">
+      {{ comment.by | titlecase }}
+      {{ comment.time | date: 'mm' }} minutes ago
+      <button class="more-btn">[-]</button>
+    </p>
   </div>
   <p class="text">{{ comment.text }}</p>
 </div>

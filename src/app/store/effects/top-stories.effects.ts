@@ -23,12 +23,16 @@ export class TopStoriesEffects {
       withLatestFrom(this.store),
       mergeMap(([action, store]) => this.apiService.getStoriesList(store.state.initialLoad)
         .pipe(
-          map(res => getTopStoriesSucces({ topStoriesList: res })),
+          map(res => getTopStoriesSucces({ topStoriesList: res, loading: false })),
           catchError(error => of(getTopStoriesFailure({ error }))),
         )
       )
     )
   );
+
+  commentGetter(list) {
+
+  }
 
   loadStoryItems$: Observable<Action> = createEffect(() =>
     this.action$.pipe(
@@ -39,28 +43,42 @@ export class TopStoriesEffects {
           store.state.topStoriesList.map(id => this.apiService.getCurrentStory(id)
           )
         ).pipe(
-          map(res => getStoryItemsSucces({ storyItems: res }))
+          map(res => getStoryItemsSucces({ storyItems: res, loading: false }))
         )
       )
     )
   );
 
-  // loadCommentItems$: Observable<Action> = createEffect(() =>
+  loadCommentItems$: Observable<Action> = createEffect(() =>
+    this.action$.pipe(
+      ofType(getComments),
+      mergeMap(commentOrStory =>
+        forkJoin(this.apiService.getCommentsFromApi(commentOrStory.ids)
+        ).pipe(
+          map(comments =>
+            getCommentsSucces({ comments: comments, loading: false })
+          )
+        ),
+      ),
+    )
+  );
+
+  // setAllComments$: Observable<Action> = createEffect(() =>
   //   this.action$.pipe(
-  //     ofType(getComments),
-  //     withLatestFrom(this.store),
-  //     map(([action, store]) => {
-  //       let commentOrStory = store.state.storyItems.find(story =>
-  //         story.id == action.id)
-  //       return commentOrStory;
-  //     }),
-  //     mergeMap(commentOrStory =>
-  //       forkJoin(this.apiService.getComments(commentOrStory.kids)
-  //       ).pipe(
-  //           map(comments => getCommentsSucces({ comments: comments })
-  //         )
-  //       )
-  //     ),
+  //     ofType(setAllComments),
+  //     mergeMap(comments => comments)
+  //               // tap(v => console.log("from tap",v)),
+  //         // map(items => {
+  //         //   return items.map(item => {
+  //         //     // if return all item with kids
+  //         //     // then call function to turn kids to comments for every item and return comments in comments prop
+  //         //     // then send back function
+
+  //         //     // else return empty comments
+  //         //     return {...item, comments: []}
+  //         //   })
+  //         // }),
+  //         // tap(v => console.log("from tap22222222222",v)),
   //   )
   // );
 

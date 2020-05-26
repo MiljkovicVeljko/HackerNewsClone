@@ -1,56 +1,65 @@
+import { State, commentItem, storyItem } from './../models/app-state.model';
 import {
   getTopStoriesSucces,
-  getTopStoriesFailure,
-  getStoryItemsFailure,
   getStoryItemsSucces,
   getCommentsSucces,
-  getCommentsFailure,
-  loadMore
+  loadMore,
+  setId,
+  getComments,
+  getTopStories
 } from './../actions/top-stories.actions';
 import { createReducer, on } from '@ngrx/store';
-import { storyItem, commentItem } from '../models/story-item.model';
-
-export interface State {
-  topStoriesList: number[],
-  storyItems: storyItem[],
-  loading: boolean,
-  error: Error,
-  initialLoad: number;
-}
 
 const initalState: State = {
   topStoriesList: [],
   storyItems: [],
-  loading: false,
+  loading: null,
   error: null,
-  initialLoad: 30
+  initialLoad: 30,
+  currentStoryId: 0
 };
 
-const commentPusher = (commentOrStory, comments) => {
+const commentPusher = (commentOrStory: commentItem | storyItem, comments: commentItem[]) => {
   if(commentOrStory.id === comments[0].parent) {
     return Object.assign({}, commentOrStory, { comments })
   }
-  if(commentOrStory.id !== comments[0].parent) {
-    return Object.assign({}, commentOrStory, {
-      comments: commentOrStory.comments.map(comment =>
-        commentPusher(comment, comments)
-      )
-    });
-  }
+  return Object.assign({}, commentOrStory, { comments: [] })
 };
 
+export const addPropComments = (storiesOrComments) => storiesOrComments.map(storyOrComment => {
+  return {...storyOrComment, comments: []}
+})
+
 export const storiesReducer = createReducer(initalState,
-  on(getTopStoriesFailure, (state, action) => ({ ...state, error: action.error })),
-  on(getTopStoriesSucces, (state, action) => ({ ...state, topStoriesList: action.topStoriesList })),
-
-  on(getStoryItemsFailure, (state, action) => ({ ...state, error: action.error })),
-  on(getStoryItemsSucces, (state, action) => ({ ...state, storyItems: action.storyItems })),
-
-  on(getCommentsFailure, (state, action) => ({ ...state, error: action.error })),
+  on(getTopStories, (state, action) => ({
+    ...state,
+    loading: action.loading
+  })),
+  on(getTopStoriesSucces, (state, action) => ({
+    ...state,
+    topStoriesList: action.topStoriesList,
+    loading: action.loading
+  })),
+  on(getComments, (state, action) => ({
+    ...state,
+    loading: action.loading
+  })),
+  on(getStoryItemsSucces, (state, action) => ({
+    ...state,
+    storyItems: addPropComments(action.storyItems),
+    loading: action.loading
+  })),
+  on(getComments, (state, action) => ({
+    ...state,
+    loading: action.loading })),
   on(getCommentsSucces, (state, action) => {
-    console.log("state",state,"act",action);
-    return state.storyItems.map(item => commentPusher(item, action.comments))
+    return {
+      ...state,
+      storyItems: state.storyItems.map(item => commentPusher(item, action.comments)),
+      loading: action.loading
+    }
   }),
 
-  on(loadMore, state => ({...state, initialLoad: state.initialLoad + 30}))
+  on(loadMore, state => ({...state, initialLoad: state.initialLoad + 30})),
+  on(setId, (state, action) => ({ ...state, currentStoryId: action.id }))
 );

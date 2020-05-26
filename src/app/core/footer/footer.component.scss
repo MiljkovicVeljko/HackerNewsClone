@@ -1,31 +1,38 @@
-footer {
+.footer {
   margin: 0 auto;
   border-top: 1px solid #FF6600;
-  width: 80vw;
+  width: 80%;
   font-size: 12px;
   color: #000;
   display: flex;
   flex-direction: column;
   align-items: center;
   @media screen and (max-width:1020px) {
-    width: 100vw;
+    width: 100%;
     align-items: stretch;
   }
-  ul {
+  .list {
     display: flex;
     align-items: center;
     justify-content: center;
     list-style-type: none;
+    flex-wrap: wrap;
     @media screen and (max-width:1020px) {
       margin: 0;
     }
 
-    li {
+    .item {
       padding: .5em;
       border-left: 1px solid #ccc;
+      @media screen and (max-width:700px) {
+        border-left: 0;
+      }
     }
   }
-  input, label {
-    margin: 0 2em;
+  .search-form {
+    margin: 2em auto;
+    @media screen and (max-width:1020px) {
+      // margin: 0;
+    }
   }
 }

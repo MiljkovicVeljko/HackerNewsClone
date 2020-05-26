@@ -1,9 +1,8 @@
-import { commentItem } from './../store/models/story-item.model';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { storyItem } from '../store/models/story-item.model';
+import { storyItem, commentItem } from '../store/models/app-state.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +24,7 @@ export class ApiService {
       )
     }
 
-  getComments(ids: number[]) {
+    getCommentsFromApi(ids: number[]) {
     return ids.map(id => this.http.get<commentItem>(`${this.baseUrl}item/${id}.json?print=pretty`))
   }
 

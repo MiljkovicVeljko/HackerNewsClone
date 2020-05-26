@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { commentItem } from 'src/app/store/models/story-item.model';
+import { commentItem } from 'src/app/store/models/app-state.model';
 
 @Component({
   selector: 'app-comment',

@@ -1,7 +1,7 @@
 
 <div class="layout" *ngIf="storyItems$ | async">
   <div class="row" *ngFor="let story of storyItems$ | async; let i = index">
-    <span>{{ i+1 }}.</span><app-story [story]="story"></app-story>
+    <span class="index">{{ i+1 }}.</span><app-story [story]="story"></app-story>
   </div>
-  <button (click)="loadMore()">More</button>
+  <button class="load-more" (click)="loadMore()">More</button>
 </div>

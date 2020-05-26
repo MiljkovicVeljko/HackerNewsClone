@@ -1,11 +1,12 @@
 .layout {
   background: #F6F6EF;
-  width: 80vw;
+  width: 80%;
   margin: auto;
-  padding-top: .5em;
+  padding: .5em 0 2em 0;
 
   @media screen and (max-width:1020px) {
-    width: 100vw;
+    width: 100%;
+
   }
   .row {
     display: flex;
@@ -14,16 +15,15 @@
     width: 100%;
 
   }
-  span {
+  .index {
     color: #ccc;
     font-size: 12px;
     text-align: right;
-    margin-right: .5em;
     width: 2em;
   }
-  button {
+  .load-more {
     border: none;
-    margin: .5em 2.5em;
+    margin: .5em 4em;
     font-size: 1em;
     padding: 0;
   }
