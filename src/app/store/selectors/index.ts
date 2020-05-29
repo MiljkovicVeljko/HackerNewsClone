@@ -31,3 +31,8 @@ export const selectLoading = createSelector(
   selectState,
   (story) => story.loading
 )
+
+export const selectloadCommentsSuccess = createSelector(
+  selectState,
+  (story) => story.loadCommentsSuccess
+)

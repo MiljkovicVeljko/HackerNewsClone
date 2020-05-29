@@ -6,6 +6,8 @@ import {
   getStoryItemsSucces,
   getComments,
   getCommentsSucces,
+  getAllCommentsSucces,
+  getAllComments,
 } from './../actions/top-stories.actions';
 import { ApiService } from './../../shared/api.service';
 import { Injectable } from "@angular/core";
@@ -55,6 +57,7 @@ export class TopStoriesEffects {
       mergeMap(commentOrStory =>
         forkJoin(this.apiService.getCommentsFromApi(commentOrStory.ids)
         ).pipe(
+          map(comments => comments.map(comment => Object.assign({}, comment, { comments: [] }))),
           map(comments =>
             getCommentsSucces({ comments: comments, loading: false })
           )
@@ -63,24 +66,20 @@ export class TopStoriesEffects {
     )
   );
 
-  // setAllComments$: Observable<Action> = createEffect(() =>
-  //   this.action$.pipe(
-  //     ofType(setAllComments),
-  //     mergeMap(comments => comments)
-  //               // tap(v => console.log("from tap",v)),
-  //         // map(items => {
-  //         //   return items.map(item => {
-  //         //     // if return all item with kids
-  //         //     // then call function to turn kids to comments for every item and return comments in comments prop
-  //         //     // then send back function
-
-  //         //     // else return empty comments
-  //         //     return {...item, comments: []}
-  //         //   })
-  //         // }),
-  //         // tap(v => console.log("from tap22222222222",v)),
-  //   )
-  // );
+  setAllComments$: Observable<Action> = createEffect(() =>
+    this.action$.pipe(
+      ofType(getAllComments),
+      mergeMap(commentOrStory =>
+        forkJoin(this.apiService.getCommentsFromApi(commentOrStory.ids)
+        ).pipe(
+          map(comments => comments.map(comment => Object.assign({}, comment, { comments: [] }))),
+          map(comments =>
+            getAllCommentsSucces({ comments: comments, loading: false })
+          )
+        ),
+      ),
+    )
+  );
 
   constructor(
     private action$: Actions,
