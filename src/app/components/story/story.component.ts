@@ -2,7 +2,7 @@ import { Store } from '@ngrx/store';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { storyItem, AppState } from 'src/app/store/models/app-state.model';
-import { setId, getComments } from 'src/app/store/actions/top-stories.actions';
+import { setId } from 'src/app/store/actions/top-stories.actions';
 
 @Component({
   selector: 'app-story',

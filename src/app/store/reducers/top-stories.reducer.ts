@@ -7,8 +7,6 @@ import {
   setId,
   getComments,
   getTopStories,
-  getAllCommentsSucces,
-  getAllComments
 } from './../actions/top-stories.actions';
 import { createReducer, on } from '@ngrx/store';
 
@@ -20,13 +18,6 @@ const initalState: State = {
   error: null,
   initialLoad: 30,
   currentStoryId: 0
-};
-
-const commentPusher = (commentOrStory: commentItem | storyItem, comments: commentItem[]) => {
-  if(commentOrStory.id === comments[0].parent) {
-    return Object.assign({}, commentOrStory, { comments })
-  }
-  return Object.assign({}, commentOrStory, { comments: [] })
 };
 
 const getAllCommentPusher = (comment: commentItem, comments: commentItem[]) => {
@@ -69,18 +60,8 @@ export const storiesReducer = createReducer(initalState,
   on(getCommentsSucces, (state, action) => {
     return {
       ...state,
-      storyItems: state.storyItems.map(item => commentPusher(item, action.comments)),
-      loading: false
-    }
-  }),
-  on(getAllComments, (state, action) => ({
-    ...state,
-    loading: action.loading })),
-  on(getAllCommentsSucces, (state, action) => {
-    return {
-      ...state,
       storyItems: state.storyItems.map(item => getAllCommentPusher(item, action.comments)),
-      loading: action.loading
+      loading: false
     }
   }),
 

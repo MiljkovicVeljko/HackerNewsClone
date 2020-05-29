@@ -6,8 +6,6 @@ import {
   getStoryItemsSucces,
   getComments,
   getCommentsSucces,
-  getAllCommentsSucces,
-  getAllComments,
 } from './../actions/top-stories.actions';
 import { ApiService } from './../../shared/api.service';
 import { Injectable } from "@angular/core";
@@ -32,10 +30,6 @@ export class TopStoriesEffects {
     )
   );
 
-  commentGetter(list) {
-
-  }
-
   loadStoryItems$: Observable<Action> = createEffect(() =>
     this.action$.pipe(
       ofType(getTopStoriesSucces),
@@ -57,24 +51,14 @@ export class TopStoriesEffects {
       mergeMap(commentOrStory =>
         forkJoin(this.apiService.getCommentsFromApi(commentOrStory.ids)
         ).pipe(
-          map(comments => comments.map(comment => Object.assign({}, comment, { comments: [] }))),
+          map(comments => comments.map(comment => {
+            if(comment.comments === undefined) {
+              return Object.assign({}, comment, { comments: [] })
+            }
+            return Object.assign({}, comment, { comments: comment.comments })
+          })),
           map(comments =>
             getCommentsSucces({ comments: comments, loading: false })
-          )
-        ),
-      ),
-    )
-  );
-
-  setAllComments$: Observable<Action> = createEffect(() =>
-    this.action$.pipe(
-      ofType(getAllComments),
-      mergeMap(commentOrStory =>
-        forkJoin(this.apiService.getCommentsFromApi(commentOrStory.ids)
-        ).pipe(
-          map(comments => comments.map(comment => Object.assign({}, comment, { comments: [] }))),
-          map(comments =>
-            getAllCommentsSucces({ comments: comments, loading: false })
           )
         ),
       ),

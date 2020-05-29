@@ -6,25 +6,33 @@
 
   @media screen and (max-width:1020px) {
     width: 100%;
-
   }
   .row {
     display: flex;
     justify-content: stretch;
     align-items: center;
     width: 100%;
-
   }
   .index {
     color: #ccc;
     font-size: 12px;
     text-align: right;
-    width: 2em;
+    // width: 2em;
+    @media screen and (max-width:520px) {
+      margin-left: 1em;
+    }
   }
   .load-more {
     border: none;
     margin: .5em 4em;
     font-size: 1em;
     padding: 0;
+  }
+}
+
+.mr-1 {
+  margin-left: .7em;
+  @media screen and (max-width:520px) {
+    margin-right: .7em;
   }
 }

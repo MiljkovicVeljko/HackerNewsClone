@@ -1,7 +1,7 @@
 import { Store } from '@ngrx/store';
 import { Component, OnInit, Input } from '@angular/core';
 import { commentItem, AppState } from 'src/app/store/models/app-state.model';
-import { getAllComments } from 'src/app/store/actions/top-stories.actions';
+import { getComments } from 'src/app/store/actions/top-stories.actions';
 
 @Component({
   selector: 'app-comment',
@@ -17,6 +17,6 @@ export class CommentComponent implements OnInit {
   }
 
   showSubComments(ids: number[]) {
-    this.store.dispatch(getAllComments({ ids: ids, loading: true }))
+    this.store.dispatch(getComments({ ids: ids, loading: true }))
   }
 }
