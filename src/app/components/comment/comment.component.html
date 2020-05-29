@@ -4,7 +4,7 @@
     <p class="card-title">
       {{ comment.by | titlecase }}
       {{ comment.time | date: 'mm' }} minutes ago
-      <button class="more-btn" *ngIf="comment.kids" (click)="showSubComments(comment.kids)">[-]</button>
+      <button class="more-btn" *ngIf="comment.kids" (click)="showSubComments(comment.kids)">[{{ comment.kids.length }} more]</button>
     </p>
     <div *ngFor="let item of comment.comments">
       <app-comment [comment]="item"></app-comment>

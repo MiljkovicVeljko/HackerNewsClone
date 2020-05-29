@@ -2,12 +2,13 @@
   <span class="arrow-up"></span>
   <div class="card-body">
     <a class="card-title" [href]="story.url" target="_blank">{{ story.title }}</a>
+    <span *ngIf="story.url" class="card-link">({{ story.url | takeUrl }})</span>
     <p class="card-text">
       {{ story.score }} points by
       <a class="sub-info" >{{ story.by }} </a>
       <a class="sub-info" >{{ story.time | date: 'HH' }} hours ago</a> |
       <a class="sub-info" >hide</a> |
-      <a class="sub-info" (click)="onShowComments(story.id)" >{{ story.descendants }} comments</a>
+      <a class="sub-info" (click)="onShowComments(story.id)" >{{ story.descendants == 0 ? "discuss" : story.descendants+" comments"}}</a>
     </p>
   </div>
 </div>
