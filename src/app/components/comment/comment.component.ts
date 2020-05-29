@@ -1,5 +1,7 @@
+import { Store } from '@ngrx/store';
 import { Component, OnInit, Input } from '@angular/core';
-import { commentItem } from 'src/app/store/models/app-state.model';
+import { commentItem, AppState } from 'src/app/store/models/app-state.model';
+import { getAllComments } from 'src/app/store/actions/top-stories.actions';
 
 @Component({
   selector: 'app-comment',
@@ -9,9 +11,12 @@ import { commentItem } from 'src/app/store/models/app-state.model';
 export class CommentComponent implements OnInit {
   @Input() comment: commentItem;
 
-  constructor() { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
   }
 
+  showSubComments(ids: number[]) {
+    this.store.dispatch(getAllComments({ ids: ids, loading: true }))
+  }
 }

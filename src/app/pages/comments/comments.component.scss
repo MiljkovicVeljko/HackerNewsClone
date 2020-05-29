@@ -10,6 +10,11 @@
   @media screen and (max-width:1020px) {
     width: 100%;
   }
+  @media screen and (max-width:720px) {
+    .wrapper {
+      margin: 1em;
+    }
+  }
   .text-box {
     margin: 1.5em 1em;
     width: 30%;

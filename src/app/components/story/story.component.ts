@@ -22,6 +22,5 @@ export class StoryComponent implements OnInit {
   onShowComments(currentId) {
     this.router.navigate([`comments/${currentId}`])
     this.store.dispatch(setId({ id: currentId }))
-    // this.store.dispatch(getComments({ ids: this.story.kids}))
   }
 }

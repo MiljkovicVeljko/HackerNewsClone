@@ -1,6 +1,5 @@
-import { State, storyItem } from './../models/app-state.model';
+import { State } from './../models/app-state.model';
 import { createSelector, createFeatureSelector } from "@ngrx/store";
-// import { AppState } from '../models/app-state.model';
 
 export const state = 'state';
 export const storyItems = 'storyItems';
@@ -30,4 +29,9 @@ export const selectStoryComments = createSelector(
 export const selectLoading = createSelector(
   selectState,
   (story) => story.loading
+)
+
+export const selectloadCommentsSuccess = createSelector(
+  selectState,
+  (story) => story.loadCommentsSuccess
 )

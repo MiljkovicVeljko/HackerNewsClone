@@ -27,7 +27,7 @@ import { CommentsComponent } from './pages/comments/comments.component';
     StoryComponent,
     CommentComponent,
     StoriesComponent,
-    CommentsComponent
+    CommentsComponent,
   ],
   imports: [
     BrowserModule,

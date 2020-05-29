@@ -5,6 +5,10 @@
     max-width: 70%;
     padding-left: 2em;
   }
+  @media screen and (max-width:720px) {
+    max-width: 70%;
+    padding: 0;
+  }
   .arrow-up {
     position: relative;
     top: -.3em;
@@ -43,5 +47,17 @@
     color: #000;
     min-width: 20em;
     max-width: 70%;
+    @media screen and (max-width:720px) {
+      font-size: 1em;
+      width: auto;
+    }
+  }
+}
+
+::ng-deep .text a {
+  font-size: 1em;
+  color: rgb(160, 160, 160);
+  @media screen and (max-width:720px) {
+    font-size: .7em;
   }
 }

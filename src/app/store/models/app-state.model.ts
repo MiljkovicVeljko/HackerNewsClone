@@ -6,6 +6,7 @@ export interface State {
   topStoriesList: number[],
   storyItems: storyItem[],
   loading: boolean,
+  loadCommentsSuccess: boolean,
   error: Error,
   initialLoad: number,
   currentStoryId: number
