@@ -61,3 +61,7 @@
     font-size: .7em;
   }
 }
+
+::ng-deep code {
+  font-size: .5em;
+}
